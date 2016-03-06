@@ -25,4 +25,16 @@ class SubscriptionAdmin(admin.ModelAdmin):
         obj.save()
 
 
-admin.site.register(models.Subscription, SubscriptionAdmin)
+class VoucherAdmin(admin.ModelAdmin):
+    list_display = ('code', )
+
+    def get_actions(self, request):
+        return []
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+admin.site.register(models.Voucher, VoucherAdmin)

@@ -6,7 +6,7 @@ from subscriptions.tests import factories as facs
 pytestmark = pytest.mark.django_db(transaction=True)
 
 
-class TestCostCenter(object):
+class TestSubscription(object):
 
     def test__str__(self):
         subscription1 = facs.SubscriptionFactory(email='foo@example.com')
@@ -20,3 +20,11 @@ class TestCostCenter(object):
         facs.SubscriptionFactory(email='foo@example.com')
 
         assert models.Subscription.objects.count() == 2
+
+
+class TestVoucher(object):
+
+    def test__str__(self):
+        voucher1 = facs.VoucherFactory(code='pindakaas')
+
+        assert str(voucher1) == 'pindakaas'

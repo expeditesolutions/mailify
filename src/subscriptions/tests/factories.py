@@ -8,3 +8,8 @@ class SubscriptionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'subscriptions.Subscription'
 
+
+class VoucherFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = 'subscriptions.Voucher'
