@@ -11,7 +11,7 @@ Installation (local)
 
     $ git clone git@github.com:Webdesignwill/mailify.git mailify
     $ cd mailify
-    $ pip install -r src/requirements.txt
+    $ pip install -r requirements.txt
 
     Now copy mailify/local_example.py to mailify/local.py and fill in the database credentials.
 
