@@ -17,3 +17,4 @@ DATABASES = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SSLIFY_DISABLE = True
