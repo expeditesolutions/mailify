@@ -15,3 +15,5 @@ DATABASES = {
         'CONN_MAX_AGE': 300,  # performance booster 3
     }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

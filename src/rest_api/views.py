@@ -22,4 +22,5 @@ class SubscriptionViewSet(CreateModelMixin,
     serializer_class = serializers.SubscriptionSerializer
 
     def perform_create(self, serializer):
-        serializer.save(created_ip_address=self.request.META['REMOTE_ADDR'])
+        subscription = serializer.save(created_ip_address=self.request.META['REMOTE_ADDR'])
+        subscription.notify()
