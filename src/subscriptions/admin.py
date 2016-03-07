@@ -38,3 +38,4 @@ class VoucherAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(models.Voucher, VoucherAdmin)
+admin.site.register(models.Subscription, SubscriptionAdmin)
