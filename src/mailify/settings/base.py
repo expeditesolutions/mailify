@@ -11,6 +11,7 @@ INSTALLED_APPS = [
     'project',
     'subscriptions',
 
+    'axes',  # keep track of failed login attempts
     'import_export',
     'rest_framework',
 ]
@@ -25,6 +26,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.FailedLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'mailify.urls'

@@ -3,3 +3,5 @@
 /static/
 src/.cache/
 local.py
+src/htmlcov/
+*.coverage
