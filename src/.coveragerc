@@ -5,6 +5,7 @@ omit =
     mailify/wsgi.py
     manage.py
     */migrations/*
+    project/authentication.py
 
     # exclude tests
     conftest.py

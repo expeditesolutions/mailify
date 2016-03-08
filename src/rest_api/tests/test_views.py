@@ -11,6 +11,15 @@ API_VERSION = '1.0'
 
 
 @pytest.mark.django_db(transaction=True)
+def test_root_get():
+    client = APIClient()
+    url = reverse('rest_api:root', kwargs=dict(version=API_VERSION))
+    assert url == '/api/1.0/'
+    response = client.get(url)
+    assert response.status_code == 200
+
+
+@pytest.mark.django_db(transaction=True)
 def test_subscriptions_get():
     client = APIClient()
     url = reverse('rest_api:subscription-list', kwargs=dict(version=API_VERSION))
