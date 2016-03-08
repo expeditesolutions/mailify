@@ -35,8 +35,10 @@ class TestSubscription(object):
         # mailbox is empty to start
         assert len(mail.outbox) == 0
         sub1 = facs.SubscriptionFactory(email='foo@example.com')
+        assert sub1.sent_emails == 0
         assert len(mail.outbox) == 0, 'no emails should be send on save'
         sub1.notify()
+        assert sub1.sent_emails == 1
         assert len(mail.outbox) == 1
         email1 = mail.outbox[0]
         assert email1.subject == 'Here is Your Promo Code!'
@@ -45,6 +47,15 @@ class TestSubscription(object):
         assert email1.from_email == settings.DEFAULT_FROM_EMAIL
         assert 'Here is your voucher' in email1.body
         assert voucher1.code in email1.body
+
+    def test_increase_sent_emails(self):
+        sub1 = facs.SubscriptionFactory(email='foo@example.com')
+        assert sub1.sent_emails == 0
+        sub1.increase_sent_emails()
+        assert sub1.sent_emails == 1
+        sub1.increase_sent_emails()
+        sub1.increase_sent_emails()
+        assert sub1.sent_emails == 3
 
 
 class TestVoucher(object):

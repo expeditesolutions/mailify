@@ -7,5 +7,5 @@ class SubscriptionResource(resources.ModelResource):
 
     class Meta:
         model = models.Subscription
-        fields = ('created', 'created_ip_address', 'email',)
-        export_order = ('created', 'created_ip_address', 'email',)
+        fields = ('email', )
+        export_order = ('email',)

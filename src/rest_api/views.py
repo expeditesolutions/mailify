@@ -24,5 +24,12 @@ class SubscriptionViewSet(CreateModelMixin,
     authentication_classes = (CsrfExemptSessionAuthentication, )
 
     def perform_create(self, serializer):
-        subscription = serializer.save(created_ip_address=self.request.META['REMOTE_ADDR'])
+        already_exists = self.queryset.filter(email=serializer.validated_data['email']).count() > 0
+
+        if not already_exists:
+            subscription = serializer.save(created_ip_address=self.request.META['REMOTE_ADDR'])
+        else:
+            subscription = self.queryset.get(email=serializer.validated_data['email'])
+
+        # always notify!
         subscription.notify()

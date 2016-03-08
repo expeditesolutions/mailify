@@ -5,6 +5,7 @@ from project.utils import send_templated_email
 class Subscription(models.Model):
     created = models.DateTimeField(editable=False, auto_now_add=True)
     created_ip_address = models.GenericIPAddressField(editable=False, null=True, blank=True)
+    sent_emails = models.PositiveIntegerField(default=0, editable=False, help_text='Counts how many time an email is sent to this address.')
 
     email = models.EmailField()
 
@@ -22,6 +23,12 @@ class Subscription(models.Model):
             html_template='subscriptions/email.html',
             context=dict(voucher=Voucher.get_code())
         )
+
+        self.increase_sent_emails()
+
+    def increase_sent_emails(self):
+        self.sent_emails = self.sent_emails + 1
+        self.save()
 
 
 class Voucher(models.Model):

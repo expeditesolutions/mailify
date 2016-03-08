@@ -5,10 +5,10 @@ from subscriptions import models, resources
 
 
 class SubscriptionAdmin(ExportMixin, admin.ModelAdmin):
-    list_display = ('email', 'created', 'created_ip_address')
+    list_display = ('email', 'created', 'created_ip_address', 'sent_emails')
     search_fields = ('email', )
     ordering = ('-created', )
-    readonly_fields = ('created', 'created_ip_address')
+    readonly_fields = ('created', 'created_ip_address', 'sent_emails',)
 
     resource_class = resources.SubscriptionResource
 
@@ -17,12 +17,16 @@ class SubscriptionAdmin(ExportMixin, admin.ModelAdmin):
             'fields': (
                 'email',
                 'created',
-                'created_ip_address')
+                'created_ip_address',
+                'sent_emails')
         }),
     )
 
     def get_actions(self, request):
         return
+
+    def has_add_permission(self, request, obj=None):
+        return False
 
     def save_model(self, request, obj, form, change):
         if change is False:
