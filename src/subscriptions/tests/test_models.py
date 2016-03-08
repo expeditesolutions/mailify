@@ -19,17 +19,17 @@ class TestSubscription(object):
         """
         Saving a duplicate emailaddress should be possible
         """
-        facs.SubscriptionFactory(email='foo@example.com')
-        facs.SubscriptionFactory(email='foo@example.com')
+        sub1 = facs.SubscriptionFactory(email='foo@example.com')
+        sub2 = facs.SubscriptionFactory(email='foo@example.com')
 
         assert models.Subscription.objects.count() == 2
+        assert sub1.sent_emails == 0, 'no sending email on save'
+        assert sub2.sent_emails == 0, 'no sending email on save'
 
     def test_notify(self):
         """
         Notifying a subscription should send out an email
         """
-
-        voucher1 = facs.VoucherFactory(code='pindakaas')
         assert models.Voucher.get_code() == 'pindakaas'
 
         # mailbox is empty to start
@@ -46,7 +46,7 @@ class TestSubscription(object):
         assert email1.to[0] == sub1.email
         assert email1.from_email == settings.DEFAULT_FROM_EMAIL
         assert 'Here is your voucher' in email1.body
-        assert voucher1.code in email1.body
+        assert 'pindakaas' in email1.body
 
     def test_increase_sent_emails(self):
         sub1 = facs.SubscriptionFactory(email='foo@example.com')
