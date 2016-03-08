@@ -86,3 +86,17 @@ def test_subscriptions_post_valid():
     assert len(mail.outbox) == 2
     sub1 = models.Subscription.objects.get(email='info@foo.com')
     assert sub1.sent_emails == 2
+
+
+@pytest.mark.django_db(transaction=True)
+def test_subscriptions_stress_test():
+    client = APIClient()
+    url = reverse('rest_api:subscription-list', kwargs=dict(version=API_VERSION))
+    assert url == '/api/1.0/subscriptions/'
+
+    for i in range(15):
+        client.post(url, data={'email': 'info@foo.com'})
+
+    response = client.post(url, data={'email': 'info@foo.com'})
+    assert response.status_code == 429
+    assert 'Request was throttled. Expected available in' in response.data['detail']
