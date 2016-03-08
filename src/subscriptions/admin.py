@@ -1,13 +1,16 @@
 from django.contrib import admin
+from import_export.admin import ExportMixin
 
-from subscriptions import models
+from subscriptions import models, resources
 
 
-class SubscriptionAdmin(admin.ModelAdmin):
+class SubscriptionAdmin(ExportMixin, admin.ModelAdmin):
     list_display = ('email', 'created', 'created_ip_address')
     search_fields = ('email', )
     ordering = ('-created', )
     readonly_fields = ('created', 'created_ip_address')
+
+    resource_class = resources.SubscriptionResource
 
     fieldsets = (
         (None, {
@@ -17,6 +20,9 @@ class SubscriptionAdmin(admin.ModelAdmin):
                 'created_ip_address')
         }),
     )
+
+    def get_actions(self, request):
+        return
 
     def save_model(self, request, obj, form, change):
         if change is False:

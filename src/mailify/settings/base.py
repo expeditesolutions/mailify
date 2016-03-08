@@ -11,6 +11,7 @@ INSTALLED_APPS = [
     'project',
     'subscriptions',
 
+    'import_export',
     'rest_framework',
 ]
 
