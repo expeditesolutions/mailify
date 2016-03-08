@@ -1,5 +1,10 @@
+from mailify.settings.utils import get_env_variable
+
 ADMINS = (
     ('Michael van de Waeter', 'info@ideallical.com'),
 )
 
-DEFAULT_FROM_EMAIL = 'send@mail.goldsmiths.co.uk'
+DEFAULT_FROM_EMAIL = 'Goldsmiths <send@mail.goldsmiths.co.uk>'
+
+EMAIL_BACKEND = 'sgbackend.SendGridBackend'
+SENDGRID_API_KEY = get_env_variable('SENDGRID_API_KEY')
