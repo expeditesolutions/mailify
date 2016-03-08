@@ -5,6 +5,10 @@ from django.views.generic import RedirectView
 from django.contrib import admin
 
 
+admin.site.site_header = 'Mailify'
+admin.site.site_title = 'Mailify administration'
+admin.site.index_title = 'Administration'
+
 urlpatterns = [
     url(r'^robots.txt$', lambda r: HttpResponse('User-agent: *\nDisallow: /', content_type='text/plain')),
     url(r'^admin/', admin.site.urls),
