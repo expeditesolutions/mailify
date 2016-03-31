@@ -5,6 +5,7 @@ from django.core import mail
 
 from rest_framework.test import APIClient
 from subscriptions import models
+from subscriptions.tests import factories as facs
 
 
 API_VERSION = '1.0'
@@ -63,6 +64,7 @@ def test_subscriptions_post_invalid2():
 @pytest.mark.django_db(transaction=True)
 def test_subscriptions_post_valid():
     client = APIClient()
+    facs.VoucherFactory(code='pindakaas')
     url = reverse('rest_api:subscription-list', kwargs=dict(version=API_VERSION))
     assert url == '/api/1.0/subscriptions/'
     assert len(mail.outbox) == 0
@@ -73,6 +75,8 @@ def test_subscriptions_post_valid():
     assert response2.data['email'] == 'info@foo.com'
     assert 'created_ip_address' in response2.data
     assert 'created' in response2.data
+    assert 'voucher' in response2.data
+    assert response2.data['voucher'] == 'pindakaas'
     assert len(mail.outbox) == 1
     sub1 = models.Subscription.objects.get(email='info@foo.com')
     assert sub1.sent_emails == 1
@@ -83,6 +87,8 @@ def test_subscriptions_post_valid():
     assert response3.data['email'] == 'info@foo.com'
     assert 'created_ip_address' not in response3.data
     assert 'created' not in response3.data
+    assert 'voucher' in response3.data
+    assert response3.data['voucher'] == 'pindakaas'
     assert len(mail.outbox) == 2
     sub1 = models.Subscription.objects.get(email='info@foo.com')
     assert sub1.sent_emails == 2
