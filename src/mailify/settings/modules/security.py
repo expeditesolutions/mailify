@@ -17,9 +17,4 @@ AXES_LOGIN_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = datetime.timedelta(minutes=15)
 AXES_LOCKOUT_TEMPLATE = 'lockout.html'
 
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = (
-    '127.0.0.1',
-    'localhost:8000',
-    'localhost'
-)
+CORS_ORIGIN_ALLOW_ALL = True
