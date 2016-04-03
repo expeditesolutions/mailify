@@ -8,3 +8,4 @@ django-sslify==0.2.7
 sendgrid-django==1.4.0
 django-import-export==0.4.3
 django-axes==1.6.0
+django-cors-headers==1.1.0

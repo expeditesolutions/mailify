@@ -14,12 +14,14 @@ INSTALLED_APPS = [
     'axes',  # keep track of failed login attempts
     'import_export',
     'rest_framework',
+    'corsheaders',  # allow access from other origin
 ]
 
 MIDDLEWARE_CLASSES = [
     'sslify.middleware.SSLifyMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

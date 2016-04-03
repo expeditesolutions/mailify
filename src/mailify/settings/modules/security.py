@@ -16,3 +16,10 @@ AXES_LOGIN_FAILURE_LIMIT = 5
 # If set, defines a period of inactivity after which old failed login attempts will be forgotten. Can be set to a python timedelta object or an integer. If an integer, will be interpreted as a number of hours.
 AXES_COOLOFF_TIME = datetime.timedelta(minutes=15)
 AXES_LOCKOUT_TEMPLATE = 'lockout.html'
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    '127.0.0.1',
+    'localhost:8000',
+    'localhost'
+)
