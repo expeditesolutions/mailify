@@ -4,7 +4,7 @@ from mailify.settings.utils import get_env_variable
 
 SECRET_KEY = get_env_variable('SECRET_KEY')
 
-ALLOWED_HOSTS = ['mailify-production.herokuapp.com', ]
+ALLOWED_HOSTS = ['mailify.herokuapp.com', ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
