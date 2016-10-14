@@ -7,7 +7,7 @@ from django.db import migrations, models
 
 def add_voucher_code(apps, schema_editor):
     Voucher = apps.get_model("subscriptions", "Voucher")
-    Voucher.objects.create(code='pindakaas')
+    Voucher.objects.create(code='DIAMRING15')
 
 
 class Migration(migrations.Migration):
