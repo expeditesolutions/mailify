@@ -1,7 +1,7 @@
 from mailify.settings.utils import get_env_variable
 
 ADMINS = (
-    ('Michael van de Waeter', 'info@ideallical.com'),
+    ('Biglight', 'heroku@biglight.co.uk'),
 )
 
 DEFAULT_FROM_EMAIL = 'Goldsmiths <noreply@mail.goldsmiths.co.uk>'
