@@ -4,7 +4,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
     cd ..
     git push heroku master
-    heroku run python src/manage.py migrate
-    heroku open
+    heroku run --app mailify python src/manage.py migrate
+    heroku --app mailify open
     cd deploy
 fi
